@@ -4,21 +4,31 @@
 node_modules/
 
 # ==============================================================
-# Yarn 4 (Berry) - Plug'n'Play, non Zero-Install
+# Yarn 4 (Berry) - node-modules linker, non Zero-Install
 #
-# .yarnrc.yml sets enableGlobalCache: true, so the package cache
-# lives outside the repo (~/.yarn/berry/cache) and Zero-Install is
-# not possible. Everything Yarn generates is disposable:
-# `corepack yarn install` rebuilds it from yarn.lock.
+# The shared `.yarnrc.yml` next to this file sets
+# `nodeLinker: node-modules`. Yarn reads rc files from parent
+# directories, so every exercise below this one gets an ordinary
+# `node_modules/` instead of Plug'n'Play. That is what lets editors
+# and tools resolve dependencies with no per-project SDK step.
 #
-# Committed on purpose (never ignore): package.json, yarn.lock,
-# .yarnrc.yml.
+# Each exercise also sets `enableGlobalCache: true` in its own
+# `.yarnrc.yml`, so the package cache lives outside the repo
+# (~/.yarn/berry/cache) and Zero-Install is not possible. Everything
+# Yarn generates is disposable: `corepack yarn install` rebuilds it
+# from yarn.lock.
+#
+# Committed on purpose (never ignore): package.json, yarn.lock and
+# every `.yarnrc.yml`.
 #
 # The `**/` prefix is required, not decorative: every exercise is
 # its own Yarn project nested below this file, and a pattern with a
 # slash in the middle is anchored to this directory only. Verified
 # with `git check-ignore -v`.
 # ==============================================================
+# Belt and braces: with `nodeLinker: node-modules` these are not
+# produced, but a project that opts back into PnP must not commit
+# them. In practice only `install-state.gz` lands in `.yarn/`.
 .pnp.*
 **/.yarn/*
 
@@ -28,7 +38,6 @@ node_modules/
 !**/.yarn/patches
 !**/.yarn/plugins
 !**/.yarn/releases
-!**/.yarn/sdks
 !**/.yarn/versions
 
 # If you ever switch to Zero-Install (enableGlobalCache: false plus a
