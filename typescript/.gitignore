@@ -1,0 +1,50 @@
+# ==============================================================
+# Node
+# ==============================================================
+node_modules/
+
+# ==============================================================
+# Yarn 4 (Berry) - Plug'n'Play, non Zero-Install
+#
+# .yarnrc.yml sets enableGlobalCache: true, so the package cache
+# lives outside the repo (~/.yarn/berry/cache) and Zero-Install is
+# not possible. Everything Yarn generates is disposable:
+# `corepack yarn install` rebuilds it from yarn.lock.
+#
+# Committed on purpose (never ignore): package.json, yarn.lock,
+# .yarnrc.yml.
+#
+# The `**/` prefix is required, not decorative: every exercise is
+# its own Yarn project nested below this file, and a pattern with a
+# slash in the middle is anchored to this directory only. Verified
+# with `git check-ignore -v`.
+# ==============================================================
+.pnp.*
+**/.yarn/*
+
+# Kept if you ever add them (the exception list from the Yarn docs).
+# `**/.yarn/*` ignores the *contents* of the directory, not the
+# directory itself, which is what lets these be re-included.
+!**/.yarn/patches
+!**/.yarn/plugins
+!**/.yarn/releases
+!**/.yarn/sdks
+!**/.yarn/versions
+
+# If you ever switch to Zero-Install (enableGlobalCache: false plus a
+# committed cache), drop `**/.yarn/*` and commit `.yarn/cache`,
+# `.yarn/unplugged` and `.pnp.cjs` instead.
+
+# ==============================================================
+# Tooling / runtime state
+# ==============================================================
+.atl/
+coverage/
+*.log
+*.tsbuildinfo
+
+# ==============================================================
+# OS / editor noise
+# ==============================================================
+.DS_Store
+Thumbs.db
