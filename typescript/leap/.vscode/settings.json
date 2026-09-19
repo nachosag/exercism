@@ -1,0 +1,10 @@
+{
+  "cSpell.words": [
+    "exercism"
+  ],
+  "search.exclude": {
+    "**/.yarn": true,
+    "**/.pnp.*": true
+  },
+  "js/ts.tsdk.path": "node_modules/typescript/lib"
+}
